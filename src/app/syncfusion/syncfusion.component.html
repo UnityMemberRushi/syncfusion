@@ -1,0 +1,59 @@
+<div class="container" >
+    <form [formGroup]="formgroup" (ngSubmit)="signup()">
+        <div class="dropdown">
+            <ejs-dropdownlist  formControlName="dropdown" 
+            placeholder="Select a game"
+            [dataSource]='sportsData'  
+            [fields]='fields' 
+            popupHeight="220px"
+             
+            [ngClass]="{'is-invalid': submitted && formgroup.get('dropdown').errors}"
+            ></ejs-dropdownlist>
+            <div *ngIf="submitted && f['dropdown'].errors || formgroup.get('dropdown').touched && formgroup.get('dropdown').invalid">
+                <div *ngIf="formgroup.get('dropdown').errors.required" style="color:red">dropdown required</div>
+            </div>
+        </div>
+        <div class="multiple-select">
+            <ejs-multiselect id='multiselectelement' 
+            [dataSource]='data' 
+            [fields]="multi"
+            [value]="value"
+            (select)="onSelect($event)"
+            select = "MultiselectChange"
+            formControlName="multiselect"
+            placeholder="Select games"
+            popupHeight="201px" 
+            popupWidth="250px" [ngClass]="{'is-invalid': submitted && formgroup.get('multiselect').errors}"
+            ></ejs-multiselect>
+        </div>
+
+        <div *ngIf="submitted && f['multiselect'].errors || formgroup.get('multiselect').touched && formgroup.get('multiselect').invalid" >
+            <div *ngIf="formgroup.get('multiselect').errors" class="alert alert-danger" style="color:red">* Required</div>
+        </div>
+
+        <div class="form-item" >
+            <ejs-datepicker 
+            format="dd-MM-yyyy" 
+            formControlName="ejsDate" 
+            placeholder="ejs Date"  
+            cssClass="e-outline" 
+            floatLabelType="Auto" [ngClass]="{'is-invalid': submitted && formgroup.get('ejsDate').errors}"
+            ></ejs-datepicker>
+            <div *ngIf="submitted && f['ejsDate'].errors || formgroup.get('ejsDate').touched && formgroup.get('ejsDate').invalid">
+                <div *ngIf="formgroup.get('ejsDate').errors.required" style="color:red">Date is required</div>
+            </div>
+        </div>
+        <div class="e-input-group">
+            <input class="e-input" name='input' type="text" 
+            placeholder = "Enter name"
+            formControlName="name" [ngClass]="{'is-invalid': submitted && formgroup.get('name').errors}"
+            />
+        </div>
+        <div *ngIf="submitted && f['name'].errors || formgroup.get('name').touched && formgroup.get('name').invalid" class="alert alert-danger">
+            <div *ngIf="formgroup.get('name').errors.required" class="alert alert-danger" style="color:red">name required</div>
+        </div>
+        <span class="e-input-group-icon e-input-popup-date" ></span>
+        
+        <button type="submit"  class="btn btn-primary" >submit</button>
+    </form>
+    </div>
